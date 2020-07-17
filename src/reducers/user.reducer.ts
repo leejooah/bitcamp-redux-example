@@ -16,6 +16,10 @@ export function userReducers(state = initialState, action) { //prop로 두개를
             return {
 
             }
+        case "join" :
+            return {
+                user : action.user
+            }
         default:
             return state
     }

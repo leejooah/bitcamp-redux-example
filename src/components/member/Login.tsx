@@ -17,7 +17,7 @@ class Login extends Component<any, any> {
     }
     handleChange(e){
         const {name, value}  = e.target
-        this.setState({[name] : value})
+        this.setState({[name] : value}) //동적으로 만든다. html5의 name이 parameter로 들어오는 느낌?? 이거 안하면 그냥 key값이 string으로 들어온다.
     }
     handleSubmit(e){
         e.preventDefault()
@@ -70,12 +70,13 @@ class Login extends Component<any, any> {
     }
 
 }
-function mapStateToProps(state) {
-    const {logginIn} = state.userReducers
-    return {logginIn}
-}
-const actionCreators =  {
-    login : userActions.login
-}
-const connectedLoginPage = connect(mapStateToProps, actionCreators)(Login)
+// function mapStateToProps(state) { //상태변수를 property로 연결한다.
+//       //userActions가 return한 state가 들어간다
+//     return  state.userReducers
+// }
+
+// const actionCreators =  { //이벤트가 발생하면 action을 dispatch해준다.
+//     login :
+// }
+const connectedLoginPage = connect(state=>{return state.userReducers},  userActions.login)(Login) //store를 가져와서 사용하는 component
 export {connectedLoginPage as Login}
